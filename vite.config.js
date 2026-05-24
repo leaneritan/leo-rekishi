@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
-base: '/rekishi-study-app/',
+export default defineConfig({
   plugins: [react()],
-  base: '/leo-rekishi-app/',
+  base: '/rekishi-study-app/',
 })
