@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import manifest from '../content/manifest.json';
 import UnitCard from '../components/UnitCard';
 import { useProgress } from '../hooks/useProgress';
-import { BookOpen, Trophy, Calendar } from 'lucide-react';
+import { BookOpen, Trophy, Calendar, ExternalLink } from 'lucide-react';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -61,7 +61,7 @@ const Home = () => {
       </main>
 
       {/* Global Action */}
-      <footer className="pt-8 text-center">
+      <footer className="pt-8 text-center space-y-4">
         <button
           onClick={() => navigate('/quiz/all')}
           className="group relative px-8 py-5 bg-white text-background font-bold rounded-2xl transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-white/10 overflow-hidden"
@@ -71,6 +71,17 @@ const Home = () => {
             📝 総合テスト（全範囲）
           </span>
         </button>
+        <div>
+          <a
+            href={`${import.meta.env.BASE_URL}index.html`}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-white/10 hover:bg-white/15 text-white font-semibold rounded-lg border border-white/10 transition-colors"
+          >
+            <ExternalLink size={18} />
+            Open HTML
+          </a>
+        </div>
         <p className="mt-4 text-muted text-sm">全ユニットのクイズからランダムに出題されます</p>
       </footer>
     </div>
