@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>歴史テスト対策｜4日間完全学習アプリ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#090b18;--panel:#111326;--card:#181c34;--border:rgba(255,255,255,0.08);
+  --text:#e8eaf6;--muted:#7880aa;
+  --c1:#f0c040;--c2:#38d9c0;--c3:#ff8844;--c4:#4a9eff;--c5:#bb77ff;--ctest:#44cc88;
+  --red:#ff5566;--green:#44cc88;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;height:54px;background:rgba(9,11,24,0.97);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:4px;padding:0 12px;z-index:200;backdrop-filter:blur(12px);overflow-x:auto;}
+.nb{flex-shrink:0;background:none;border:1px solid var(--border);color:var(--muted);padding:6px 12px;border-radius:6px;cursor:pointer;font-size:12px;font-family:'Noto Sans JP',sans-serif;transition:all .2s;white-space:nowrap;}
+.nb:hover,.nb.on{color:var(--bg);font-weight:700;}
+.nb[data-s="s1"].on{background:var(--c1);border-color:var(--c1);}
+.nb[data-s="s2"].on{background:var(--c2);border-color:var(--c2);}
+.nb[data-s="s3"].on{background:var(--c3);border-color:var(--c3);}
+.nb[data-s="s4"].on{background:var(--c4);border-color:var(--c4);}
+.nb[data-s="s5"].on{background:var(--c5);border-color:var(--c5);}
+.nb[data-s="s6"].on{background:var(--ctest);border-color:var(--ctest);}
+.nb[data-s="s1"]:hover{background:var(--c1);border-color:var(--c1);}
+.nb[data-s="s2"]:hover{background:var(--c2);border-color:var(--c2);}
+.nb[data-s="s3"]:hover{background:var(--c3);border-color:var(--c3);}
+.nb[data-s="s4"]:hover{background:var(--c4);border-color:var(--c4);}
+.nb[data-s="s5"]:hover{background:var(--c5);border-color:var(--c5);}
+.nb[data-s="s6"]:hover{background:var(--ctest);border-color:var(--ctest);}
+
+/* ── PROGRESS ── */
+#pbar{position:fixed;top:54px;left:0;height:3px;background:linear-gradient(90deg,var(--c1),var(--c2));transition:width .4s;z-index:199;}
+
+/* ── SECTIONS ── */
+.sec{display:none;padding:74px 16px 60px;max-width:900px;margin:0 auto;}
+.sec.on{display:block;animation:fadeUp .35s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── HEADERS ── */
+.sec-head{margin-bottom:28px;}
+.day-badge{display:inline-block;font-family:'Share Tech Mono',monospace;font-size:10px;padding:3px 10px;border-radius:20px;margin-bottom:10px;font-weight:bold;}
+.sec-title{font-family:'Noto Serif JP',serif;font-size:clamp(22px,5vw,36px);font-weight:900;margin-bottom:6px;}
+.sec-q{font-size:13px;color:var(--muted);line-height:1.7;padding:10px 14px;background:var(--panel);border-radius:8px;border-left:3px solid;}
+.acc{color:var(--c1);}
+
+/* ── CARDS ── */
+.grid{display:grid;gap:14px;margin:18px 0;}
+.g2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
+.g3{grid-template-columns:repeat(auto-fit,minmax(200px,1fr));}
+.g4{grid-template-columns:repeat(auto-fit,minmax(180px,1fr));}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.card h4{font-family:'Noto Serif JP',serif;font-size:16px;margin-bottom:8px;}
+.card p,.card li{font-size:13px;color:var(--muted);line-height:1.8;}
+.card ul{list-style:none;padding:0;}
+.card ul li{padding-left:14px;position:relative;}
+.card ul li::before{content:'▸';position:absolute;left:0;color:var(--c2);font-size:10px;top:4px;}
+.big-num{font-family:'Share Tech Mono',monospace;font-size:32px;font-weight:bold;margin-bottom:6px;}
+
+/* ── SECTION COLORS (border-top) ── */
+.s1c::before{background:var(--c1);}.s1c h4,.s1c .big-num{color:var(--c1);}
+.s2c::before{background:var(--c2);}.s2c h4,.s2c .big-num{color:var(--c2);}
+.s3c::before{background:var(--c3);}.s3c h4,.s3c .big-num{color:var(--c3);}
+.s4c::before{background:var(--c4);}.s4c h4,.s4c .big-num{color:var(--c4);}
+.s5c::before{background:var(--c5);}.s5c h4,.s5c .big-num{color:var(--c5);}
+
+/* ── SUBHEAD ── */
+h3.sh{font-family:'Noto Serif JP',serif;font-size:16px;margin:28px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
+h3.sh span{font-size:11px;padding:2px 8px;border-radius:4px;font-family:'Share Tech Mono',monospace;}
+
+/* ── HIGHLIGHT BOXES ── */
+.hbox{border-radius:10px;padding:14px 18px;margin:14px 0;font-size:14px;line-height:1.8;}
+.hbox strong{font-weight:700;}
+.gold-box{background:rgba(240,192,64,.08);border:1px solid rgba(240,192,64,.3);}
+.gold-box strong{color:var(--c1);}
+.teal-box{background:rgba(56,217,192,.08);border:1px solid rgba(56,217,192,.3);}
+.teal-box strong{color:var(--c2);}
+.orange-box{background:rgba(255,136,68,.08);border:1px solid rgba(255,136,68,.3);}
+.orange-box strong{color:var(--c3);}
+.blue-box{background:rgba(74,158,255,.08);border:1px solid rgba(74,158,255,.3);}
+.blue-box strong{color:var(--c4);}
+.purple-box{background:rgba(187,119,255,.08);border:1px solid rgba(187,119,255,.3);}
+.purple-box strong{color:var(--c5);}
+
+/* ── CENTURY TABLE ── */
+.ctable{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0;}
+.ctable th{background:var(--panel);padding:8px 12px;text-align:left;font-size:11px;color:var(--muted);border-bottom:1px solid var(--border);}
+.ctable td{padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.04);}
+.ctable tr:hover td{background:rgba(255,255,255,.02);}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;}
+.tag-bc{background:var(--red);color:#fff;}
+.tag-ad{background:var(--c4);color:#fff;}
+.tag-g{background:var(--c1);color:#090b18;}
+
+/* ── FLASHCARDS ── */
+.fc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:14px 0;}
+.fc{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;cursor:pointer;transition:border-color .2s;min-height:80px;display:flex;flex-direction:column;justify-content:space-between;}
+.fc:hover{border-color:rgba(255,255,255,.2);}
+.fc .term{font-family:'Noto Serif JP',serif;font-size:15px;font-weight:700;margin-bottom:6px;}
+.fc .def{font-size:12px;color:var(--muted);line-height:1.7;display:none;}
+.fc .hint{font-size:10px;color:var(--muted);font-family:'Share Tech Mono',monospace;opacity:.6;}
+.fc.open .def{display:block;}
+.fc.open .hint{display:none;}
+.fc.open{border-color:var(--c2);}
+
+/* ── CIVILIZATION TABLE ── */
+.civ-table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0;overflow-x:auto;display:block;}
+.civ-table th{padding:10px 12px;text-align:left;background:var(--panel);border-bottom:2px solid var(--border);font-size:11px;color:var(--muted);white-space:nowrap;}
+.civ-table td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:top;line-height:1.7;}
+.civ-table tr:hover td{background:rgba(255,255,255,.02);}
+.civ-name{font-family:'Noto Serif JP',serif;font-weight:700;font-size:15px;}
+
+/* ── RELIGION CARDS ── */
+.rel-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:14px;}
+.rel-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.rel-name{font-family:'Noto Serif JP',serif;font-size:22px;font-weight:900;}
+.rel-founder{font-size:13px;color:var(--muted);}
+.rel-rows{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;}
+.rel-row{background:var(--panel);border-radius:8px;padding:10px 12px;}
+.rel-label{font-size:10px;color:var(--muted);font-family:'Share Tech Mono',monospace;letter-spacing:.08em;display:block;margin-bottom:4px;}
+.rel-val{font-size:13px;line-height:1.6;}
+
+/* ── TIMELINE ── */
+.tl{position:relative;padding-left:70px;margin:16px 0;}
+.tl-line{position:absolute;left:28px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--red) 30%,var(--c4) 30%);}
+.tl-item{position:relative;margin-bottom:0;padding:8px 0 8px 16px;}
+.tl-dot{position:absolute;left:-41px;top:12px;width:10px;height:10px;border-radius:50%;border:2px solid var(--bg);}
+.tl-dot.bc{background:var(--red);}
+.tl-dot.ad{background:var(--c4);}
+.tl-dot.sp{background:var(--c1);width:14px;height:14px;left:-43px;}
+.tl-yr{position:absolute;left:-70px;top:8px;font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);text-align:right;width:42px;line-height:1.4;}
+.tl-box{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 14px;}
+.tl-box .era{font-size:10px;color:var(--c2);font-weight:700;margin-bottom:3px;}
+.tl-box .ev{font-size:14px;font-family:'Noto Serif JP',serif;font-weight:700;margin-bottom:2px;}
+.tl-box .detail{font-size:12px;color:var(--muted);line-height:1.6;}
+
+/* ── QUIZ ── */
+#quiz-area{max-width:680px;margin:0 auto;}
+.qprog{display:flex;gap:5px;margin-bottom:24px;flex-wrap:wrap;}
+.qpdot{height:6px;flex:1;min-width:8px;border-radius:3px;background:var(--panel);border:1px solid var(--border);transition:background .3s;}
+.qpdot.ok{background:var(--green);}
+.qpdot.ng{background:var(--red);}
+.qpdot.cur{background:var(--c1);}
+.qcard{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:14px;}
+.qnum{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--c2);letter-spacing:.15em;margin-bottom:8px;}
+.qtag{display:inline-block;font-size:10px;padding:2px 8px;border-radius:3px;margin-bottom:10px;font-weight:700;}
+.qtext{font-family:'Noto Serif JP',serif;font-size:17px;font-weight:700;line-height:1.6;margin-bottom:20px;}
+.opts{display:flex;flex-direction:column;gap:8px;}
+.opt{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;cursor:pointer;font-size:14px;font-family:'Noto Sans JP',sans-serif;text-align:left;color:var(--text);transition:all .2s;display:flex;align-items:flex-start;gap:10px;}
+.opt:hover:not(.locked){border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.04);}
+.opt.correct{border-color:var(--green);background:rgba(68,204,136,.1);color:var(--green);}
+.opt.wrong{border-color:var(--red);background:rgba(255,85,102,.1);color:var(--red);}
+.opt-l{width:24px;height:24px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-family:'Share Tech Mono',monospace;font-size:11px;flex-shrink:0;border:1px solid var(--border);}
+.fb{display:none;margin-top:14px;padding:12px 16px;border-radius:8px;font-size:13px;line-height:1.7;}
+.fb.show{display:block;}
+.fb.ok{background:rgba(68,204,136,.1);border:1px solid var(--green);color:var(--green);}
+.fb.ng{background:rgba(255,85,102,.1);border:1px solid var(--red);color:var(--red);}
+.qnav{display:flex;justify-content:flex-end;margin-top:14px;}
+.qbtn{background:var(--c1);border:none;color:#090b18;padding:11px 26px;border-radius:8px;cursor:pointer;font-size:14px;font-family:'Noto Sans JP',sans-serif;font-weight:700;display:none;transition:opacity .2s;}
+.qbtn.show{display:block;}
+.qbtn:hover{opacity:.85;}
+.startbtn{background:var(--ctest);border:none;color:#090b18;padding:14px 36px;border-radius:10px;cursor:pointer;font-size:16px;font-family:'Noto Sans JP',sans-serif;font-weight:700;display:block;margin:20px auto;transition:opacity .2s;}
+.startbtn:hover{opacity:.85;}
+
+/* ── RESULT ── */
+.result{display:none;text-align:center;padding:40px 20px;}
+.result.show{display:block;}
+.rscore{font-family:'Noto Serif JP',serif;font-size:80px;font-weight:900;color:var(--c1);line-height:1;}
+.rlabel{font-size:14px;color:var(--muted);margin:6px 0 20px;}
+.rmsg{font-size:19px;font-weight:700;margin-bottom:8px;}
+.rbreak{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin:20px 0;text-align:left;}
+.rbi{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:13px;}
+.rbi .rbl{font-size:10px;color:var(--muted);margin-bottom:4px;}
+.rbi .rbv{font-size:16px;font-weight:700;}
+.rbtn{background:var(--card);border:1px solid var(--border);color:var(--text);padding:11px 22px;border-radius:8px;cursor:pointer;font-size:14px;font-family:'Noto Sans JP',sans-serif;margin:0 5px;transition:all .2s;}
+.rbtn:hover{border-color:var(--c1);color:var(--c1);}
+.rbtn.p{background:var(--c1);color:#090b18;border-color:var(--c1);font-weight:700;}
+.rbtn.p:hover{opacity:.85;}
+
+/* ── MISC ── */
+.pill{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;margin:2px;}
+.era-strip{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;}
+.era-chip{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 14px;text-align:center;}
+.era-chip .en{font-family:'Noto Serif JP',serif;font-size:18px;font-weight:700;color:var(--c1);display:block;}
+.era-chip .ey{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);display:block;margin-top:2px;}
+.calc-box{background:var(--panel);border-radius:10px;padding:16px;margin:14px 0;font-family:'Share Tech Mono',monospace;font-size:13px;line-height:2.2;border:1px solid var(--border);}
+.calc-box .hl{color:var(--c1);}
+.calc-box .hl2{color:var(--c2);}
+@media(max-width:500px){.sec{padding:68px 12px 50px;}.qtext{font-size:15px;}}
+.scroll-top{position:fixed;bottom:20px;right:16px;background:var(--c1);color:#090b18;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:18px;z-index:150;display:none;}
+</style>
+</head>
+<body>
+
+<nav>
+  <button class="nb on" data-s="s1" onclick="go('s1')">① 年代・時代区分</button>
+  <button class="nb" data-s="s2" onclick="go('s2')">② 調べ方</button>
+  <button class="nb" data-s="s3" onclick="go('s3')">③ 人類の進化</button>
+  <button class="nb" data-s="s4" onclick="go('s4')">④ 古代文明</button>
+  <button class="nb" data-s="s5" onclick="go('s5')">⑤ 三大宗教</button>
+  <button class="nb" data-s="s6" onclick="go('s6')">📝 総合テスト</button>
+</nav>
+<div id="pbar" style="width:16%"></div>
+<button class="scroll-top" id="scrollBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- ═══════ SECTION 1: 年代・時代区分 ═══════ -->
+<section class="sec on" id="s1">
+  <div class="sec-head">
+    <div class="day-badge" style="background:rgba(240,192,64,.15);color:var(--c1);border:1px solid rgba(240,192,64,.3)">📅 Day 1 優先</div>
+    <div class="sec-title" style="color:var(--c1)">年代の表し方と時代区分</div>
+    <div class="sec-q" style="border-color:var(--c1)">学習課題：年代の表し方や時代区分にはどんな種類があるのだろうか？</div>
+  </div>
+
+  <h3 class="sh">年代の3つの表し方 <span style="background:rgba(240,192,64,.15);color:var(--c1)">最重要</span></h3>
+  <div class="grid g3">
+    <div class="card s1c">
+      <div class="big-num">①</div>
+      <h4>西暦（せいれき）</h4>
+      <p>キリストが生まれたとされる年を基準にした年の数え方。世界で広く使われる。<br><br><strong style="color:var(--red)">B.C.</strong> = Before Christ（紀元前）<br><strong style="color:var(--c4)">A.D.</strong> = 紀元（紀元後）</p>
+    </div>
+    <div class="card s1c">
+      <div class="big-num">②</div>
+      <h4>世紀（せいき）</h4>
+      <p>西暦を基準に100年を一単位として区切ったもの。1〜100年が1世紀。<br><br><strong style="color:var(--c1)">計算法：先頭2桁 ＋ 1</strong><br>例：1603年 → 16+1 = <strong style="color:var(--c1)">17世紀</strong></p>
+    </div>
+    <div class="card s1c">
+      <div class="big-num">③</div>
+      <h4>元号（げんごう）</h4>
+      <p>中国で始まり日本に伝わった年号の制度。明治以降は天皇が即位している間は一つの元号。<br><br>変換：<strong style="color:var(--c1)">始まりの年 − 1 ＋ 元号の年数</strong></p>
+    </div>
+  </div>
+
+  <div class="calc-box">
+    世紀の計算 例：<span class="hl">894年</span> → <span class="hl2">8</span> ＋ 1 ＝ <span class="hl">9世紀</span><br>
+    　　　　　　　<span class="hl">1700年</span> → <span class="hl2">17</span> ＋ 1 ＝ <span class="hl">18世紀</span><br>
+    　　　　　　　<span class="hl">2025年</span> → <span class="hl2">20</span> ＋ 1 ＝ <span class="hl">21世紀</span>（今の時代）<br>
+    元号の計算 例：令和7年 ＝ 2019 − 1 ＋ 7 ＝ <span class="hl">2025年</span>
+  </div>
+
+  <h3 class="sh">現代の元号一覧</h3>
+  <div class="era-strip">
+    <div class="era-chip"><span class="en">明治</span><span class="ey">1868〜1912年</span></div>
+    <div class="era-chip"><span class="en">大正</span><span class="ey">1912〜1926年</span></div>
+    <div class="era-chip"><span class="en">昭和</span><span class="ey">1926〜1989年</span></div>
+    <div class="era-chip"><span class="en">平成</span><span class="ey">1989〜2019年</span></div>
+    <div class="era-chip" style="border-color:var(--c1)"><span class="en" style="color:var(--c2)">令和</span><span class="ey">2019年〜</span></div>
+  </div>
+
+  <h3 class="sh">B.C.と世紀の関係</h3>
+  <table class="ctable">
+    <tr><th>世紀</th><th>西暦の範囲</th><th>説明</th></tr>
+    <tr><td><span class="tag tag-bc">紀元前3世紀</span></td><td>B.C. 201〜300年</td><td>数字が大きいほど古い（逆向き）</td></tr>
+    <tr><td><span class="tag tag-bc">紀元前1世紀</span></td><td>B.C. 1〜100年</td><td>紀元に最も近い「前」の時代</td></tr>
+    <tr><td><span class="tag tag-g">紀元（0年）</span></td><td>基準点</td><td>キリスト誕生とされる年</td></tr>
+    <tr><td><span class="tag tag-ad">1世紀</span></td><td>A.D. 1〜100年</td><td></td></tr>
+    <tr><td><span class="tag tag-ad">21世紀</span></td><td>A.D. 2001〜2100年</td><td>← 今ここ！</td></tr>
+  </table>
+
+  <h3 class="sh">大きな時代区分（5区分）<span style="background:rgba(240,192,64,.15);color:var(--c1)">順番を覚えよ</span></h3>
+  <div class="grid g2">
+    <div class="card" style="border-left:4px solid #ff8844">
+      <h4 style="color:#ff8844">古代（こだい）</h4>
+      <p>文字が使われ始める〜平安時代末。天皇・貴族が中心。<br>→ 教科書 <strong style="color:#ff8844">第2章</strong></p>
+    </div>
+    <div class="card" style="border-left:4px solid #aa66ff">
+      <h4 style="color:#aa66ff">中世（ちゅうせい）</h4>
+      <p>武士が力をつけた時代〜戦国時代。各地の武士が争う。<br>→ 教科書 <strong style="color:#aa66ff">第3章</strong></p>
+    </div>
+    <div class="card" style="border-left:4px solid var(--c4)">
+      <h4 style="color:var(--c4)">近世（きんせい）</h4>
+      <p>安土桃山時代〜江戸時代。政権が安定し商業が発展。<br>→ 教科書 <strong style="color:var(--c4)">第4章</strong></p>
+    </div>
+    <div class="card" style="border-left:4px solid var(--green)">
+      <h4 style="color:var(--green)">近代（きんだい）</h4>
+      <p>明治維新〜第二次世界大戦前後。近代国家の形成。<br>→ 教科書 <strong style="color:var(--green)">第5・6章</strong></p>
+    </div>
+    <div class="card" style="border-left:4px solid var(--red)">
+      <h4 style="color:var(--red)">現代（げんだい）</h4>
+      <p>第二次世界大戦後〜現在。高度経済成長・グローバル化。<br>→ 教科書 <strong style="color:var(--red)">第7章</strong></p>
+    </div>
+  </div>
+
+  <h3 class="sh">小さな時代区分（○○時代）<span style="background:rgba(56,217,192,.15);color:var(--c2)">名前の由来も覚えよ</span></h3>
+  <div class="grid g4" style="gap:8px">
+    <div class="card" style="padding:12px"><div style="font-size:10px;color:var(--c2);margin-bottom:4px">生活の特色から</div><div style="font-family:'Noto Serif JP',serif;font-size:15px;font-weight:700">縄文時代</div><div style="font-size:11px;color:var(--muted);margin-top:4px">縄目の文様の土器</div></div>
+    <div class="card" style="padding:12px"><div style="font-size:10px;color:var(--c2);margin-bottom:4px">生活の特色から</div><div style="font-family:'Noto Serif JP',serif;font-size:15px;font-weight:700">弥生時代</div><div style="font-size:11px;color:var(--muted);margin-top:4px">弥生式土器・稲作</div></div>
+    <div class="card" style="padding:12px"><div style="font-size:10px;color:var(--c1);margin-bottom:4px">文化の特色から</div><div style="font-family:'Noto Serif JP',serif;font-size:15px;font-weight:700">古墳時代</div><div style="font-size:11px;color:var(--muted);margin-top:4px">古墳がたくさん作られた</div></div>
+    <div class="card" style="padding:12px"><div style="font-size:10px;color:var(--c4);margin-bottom:4px">政治の中心地から</div><div style="font-family:'Noto Serif JP',serif;font-size:15px;font-weight:700">飛鳥時代</div><div style="font-size:11px;color:var(--muted);margin-top:4px">都が飛鳥にあった</div></div>
+    <div class="card" style="padding:12px"><div style="font-size:10px;color:var(--c4);margin-bottom:4px">政治の中心地から</div><div style="font-family:'Noto Serif JP',serif;font-size:15px;font-weight:700">奈良時代</div><div style="font-size:11px;color:var(--muted);margin-top:4px">都が奈良にあった</div></div>
+    <div class="card" style="padding:12px"><div style="font-size:10px;color:var(--c4);margin-bottom:4px">政治の中心地から</div><div style="font-family:'Noto Serif JP',serif;font-size:15px;font-weight:700">平安時代</div><div style="font-size:11px;color:var(--muted);margin-top:4px">都が平安京（京都）に</div></div>
+    <div class="card" style="padding:12px"><div style="font-size:10px;color:var(--c4);margin-bottom:4px">政治の中心地から</div><div style="font-family:'Noto Serif JP',serif;font-size:15px;font-weight:700">江戸時代</div><div style="font-size:11px;color:var(--muted);margin-top:4px">幕府が江戸（東京）に</div></div>
+    <div class="card" style="padding:12px"><div style="font-size:10px;color:var(--muted);margin-bottom:4px">元号から</div><div style="font-family:'Noto Serif JP',serif;font-size:15px;font-weight:700">明治時代</div><div style="font-size:11px;color:var(--muted);margin-top:4px">元号「明治」の時代</div></div>
+  </div>
+
+  <h3 class="sh">キーワード確認（クリックで答えを表示）</h3>
+  <div class="fc-grid">
+    <div class="fc s1fc" onclick="this.classList.toggle('open')"><div class="term">西暦</div><div class="def">キリストが生まれたとされる年を基準にした年の表し方。B.C.（紀元前）とA.D.（紀元後）に分かれる。</div><div class="hint">クリックで表示</div></div>
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">世紀の計算</div><div class="def">西暦の年の「先頭2桁 ＋ 1」で計算できる。例：1492年 → 14+1 = 15世紀</div><div class="hint">クリックで表示</div></div>
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">令和の始まり</div><div class="def">2019年（平成31年）5月1日から。令和7年 = 2019-1+7 = 2025年</div><div class="hint">クリックで表示</div></div>
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">古代〜現代</div><div class="def">古代→中世→近世→近代→現代の順。境目は明確でなく重なることもある。</div><div class="hint">クリックで表示</div></div>
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">縄文時代の由来</div><div class="def">縄目の文様をもつ「縄文土器」から名づけられた。生活の特色による命名。</div><div class="hint">クリックで表示</div></div>
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">奈良時代の由来</div><div class="def">都（政治の中心地）が奈良に置かれていたことから名づけられた。</div><div class="hint">クリックで表示</div></div>
+  </div>
+</section>
+
+<!-- ═══════ SECTION 2: 調べ方 ═══════ -->
+<section class="sec" id="s2">
+  <div class="sec-head">
+    <div class="day-badge" style="background:rgba(56,217,192,.15);color:var(--c2);border:1px solid rgba(56,217,192,.3)">📅 Day 1 補足</div>
+    <div class="sec-title" style="color:var(--c2)">歴史の調べ方・まとめ方・発表のしかた</div>
+    <div class="sec-q" style="border-color:var(--c2)">学習課題：歴史の謎を解くために、どのように調べ、まとめ、発表すればよいのだろうか？</div>
+  </div>
+
+  <h3 class="sh">歴史調査の流れ</h3>
+  <div class="grid g4" style="gap:10px">
+    <div class="card s2c" style="text-align:center"><div class="big-num" style="font-size:22px">STEP①</div><h4>テーマを決める</h4><p>疑問や謎から課題を設定する</p></div>
+    <div class="card s2c" style="text-align:center"><div class="big-num" style="font-size:22px">STEP②</div><h4>資料を集める</h4><p>図書館・博物館・インターネット</p></div>
+    <div class="card s2c" style="text-align:center"><div class="big-num" style="font-size:22px">STEP③</div><h4>まとめる</h4><p>年表・地図・レポートにまとめる</p></div>
+    <div class="card s2c" style="text-align:center"><div class="big-num" style="font-size:22px">STEP④</div><h4>発表する</h4><p>資料を使ってわかりやすく伝える</p></div>
+  </div>
+
+  <h3 class="sh">情報の3つの集め方</h3>
+  <div class="grid g3">
+    <div class="card s2c">
+      <div class="big-num">①</div>
+      <h4>図書館</h4>
+      <p>閉架式（自由に取れない本）があるので司書に相談する。地域の歴史書・年表などを調べる。</p>
+    </div>
+    <div class="card s2c">
+      <div class="big-num">②</div>
+      <h4>博物館・資料館</h4>
+      <p>展示・解説から情報を集める。学芸員・専門家に質問する。事前に連絡・予約が必要。</p>
+    </div>
+    <div class="card s2c">
+      <div class="big-num">③</div>
+      <h4>インターネット</h4>
+      <p>図書館・博物館・市役所などのウェブサイトを参照。リンクをたどっていろいろな資料を参考にする。</p>
+    </div>
+  </div>
+
+  <h3 class="sh">レポートの4つの要素</h3>
+  <div class="grid g2">
+    <div class="card s2c"><div class="big-num" style="font-size:20px">①</div><h4>疑問や謎</h4><p>何が疑問なのか、なぜ疑問になったか、なぜ調べたか。</p></div>
+    <div class="card s2c"><div class="big-num" style="font-size:20px">②</div><h4>自分の推理・仮説</h4><p>自分の推理や仮説を書く。根拠（証拠）も示す。</p></div>
+    <div class="card s2c"><div class="big-num" style="font-size:20px">③</div><h4>分かったこと</h4><p>大きな項目・小さな項目に整理。写真・地図・年表・グラフで表す。</p></div>
+    <div class="card s2c"><div class="big-num" style="font-size:20px">④</div><h4>結論</h4><p>分かったこと・分からなかったこと・今後の課題を書く。</p></div>
+  </div>
+
+  <h3 class="sh">5W1H で調べる</h3>
+  <div class="teal-box hbox">
+    <strong>いつ（When）</strong>・<strong>どこで（Where）</strong>・<strong>だれが（Who）</strong>・<strong>何を（What）</strong>・<strong>なぜ（Why）</strong>・<strong>どのように（How）</strong><br><br>
+    レポートや年表に記録するとき、この6つの観点で情報を整理すると漏れがなくなる。
+  </div>
+
+  <h3 class="sh">発表で使うビジュアル資料</h3>
+  <div class="grid g2">
+    <div class="card s2c"><h4>年表（いつを示す）</h4><p>出来事を時間順に整理。「いつ、何があったか」を伝えるのに効果的。</p></div>
+    <div class="card s2c"><h4>地図（どこを示す）</h4><p>調べた場所を地図で示す。道や川・目安になる建物も加える。</p></div>
+    <div class="card s2c"><h4>写真・イラスト（誰・何を示す）</h4><p>調べた内容の様子を紹介。高い場所から撮るとよい写真が撮れる。</p></div>
+    <div class="card s2c"><h4>関係図・流れ図（どのようにを示す）</h4><p>人物や出来事の関係を整理。情報を多く載せすぎると逆効果。</p></div>
+  </div>
+
+  <h3 class="sh">キーワード確認（クリックで答えを表示）</h3>
+  <div class="fc-grid">
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">5W1H</div><div class="def">When(いつ)・Where(どこで)・Who(だれが)・What(何を)・Why(なぜ)・How(どのように)の6つの観点。</div><div class="hint">クリックで表示</div></div>
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">仮説（かせつ）</div><div class="def">まだ確かめていない、自分の推理・予想。証拠を集めて確かめる。</div><div class="hint">クリックで表示</div></div>
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">年表の役割</div><div class="def">出来事を時間順（いつ）に整理し、つながりを分かりやすく示す資料。</div><div class="hint">クリックで表示</div></div>
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">閉架式</div><div class="def">図書館で自由に手に取れない本の保管方式。司書に申し込む必要がある。</div><div class="hint">クリックで表示</div></div>
+  </div>
+</section>
+
+<!-- ═══════ SECTION 3: 人類の進化 ═══════ -->
+<section class="sec" id="s3">
+  <div class="sec-head">
+    <div class="day-badge" style="background:rgba(255,136,68,.15);color:var(--c3);border:1px solid rgba(255,136,68,.3)">📅 Day 2 優先</div>
+    <div class="sec-title" style="color:var(--c3)">人類の登場から文明の発生へ ① 人類の進化</div>
+    <div class="sec-q" style="border-color:var(--c3)">学習課題：人類は進化の過程で、どのように生活を変化させてきたのだろうか？</div>
+  </div>
+
+  <h3 class="sh">人類の進化の3段階</h3>
+  <div class="grid g3">
+    <div class="card s3c">
+      <div class="big-num">猿人</div>
+      <h4 style="color:var(--c3)">（えんじん）</h4>
+      <p><strong style="color:var(--c3)">約700万年前</strong>、アフリカで誕生。<br><br>・地上を<strong>二足歩行</strong>するようになる<br>・脳が発達し、手を使って石を<strong>道具</strong>として使い始める<br>・簡単な打製石器を使用</p>
+    </div>
+    <div class="card s3c">
+      <div class="big-num">原人</div>
+      <h4 style="color:var(--c3)">（げんじん）</h4>
+      <p><strong style="color:var(--c3)">約240万年前</strong>から。<br><br>・<strong>火</strong>を使うようになる<br>・<strong>言葉（ことば）</strong>を発達させる<br>・打製石器を使用（より発達）<br>・アフリカ以外にも広がる</p>
+    </div>
+    <div class="card s3c">
+      <div class="big-num">新人</div>
+      <h4 style="color:var(--c3)">（しんじん）</h4>
+      <p><strong style="color:var(--c3)">約20万年前</strong>から。現代人の直接の祖先。<br><br>・<strong>洞窟壁画</strong>などの精神活動<br>・磨製石器・土器を使用（新石器時代）<br>・全世界に広がる</p>
+    </div>
+  </div>
+
+  <h3 class="sh">石器時代の2区分</h3>
+  <div class="grid g2">
+    <div class="card" style="border-top:3px solid var(--red)">
+      <h4 style="color:var(--red)">旧石器時代（きゅうせっきじだい）</h4>
+      <p>打製石器（だせいせっき）を使った時代。石を打ち砕いて作った刃物。狩りや漁・採集で生活。猿人〜新人が使用。</p>
+      <div style="margin-top:12px;padding:10px;background:var(--panel);border-radius:6px;font-size:12px;color:var(--muted)">🗿 打製石器 = 石を「打って」作る → 荒削り</div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--c2)">
+      <h4 style="color:var(--c2)">新石器時代（しんせっきじだい）</h4>
+      <p>磨製石器（ませいせっき）を使った時代。石を磨いて作った精巧な道具。農耕・牧畜・土器も始まる。</p>
+      <div style="margin-top:12px;padding:10px;background:var(--panel);border-radius:6px;font-size:12px;color:var(--muted)">🪨 磨製石器 = 石を「磨いて」作る → 精巧</div>
+    </div>
+  </div>
+
+  <h3 class="sh">日本列島と氷期</h3>
+  <div class="orange-box hbox">
+    <strong>氷期（約260万年前〜）</strong>：海面が低く、日本列島は大陸（中国・朝鮮半島・シベリア）と陸続きだった。<br>
+    → <strong>ナウマンゾウ</strong>などの大型動物が日本列島に移動<br>
+    → これらを追って<strong>新人が日本列島に渡ってきた</strong>（旧石器時代）<br><br>
+    <strong>約1万年前</strong>：最後の氷期が終わり、気候が温暖化。大型動物が減少。<br>
+    → 農耕・牧畜が始まり、縄文時代へ移行<br><br>
+    <strong>1946年</strong>：群馬県・岩宿遺跡で日本初の打製石器が発見（昭和21年）
+  </div>
+
+  <h3 class="sh">文明が生まれる条件</h3>
+  <div class="card" style="border-color:rgba(255,136,68,.3)">
+    <p style="font-size:14px;line-height:2">
+      ① <strong style="color:var(--c3)">大河の流域</strong>で農耕・牧畜が発達<br>
+      ② 食料を蓄えられるようになり、<strong style="color:var(--c3)">人口が増加</strong><br>
+      ③ 食料を管理する<strong style="color:var(--c3)">王</strong>が現れ、<strong style="color:var(--c3)">神殿・都市</strong>が誕生<br>
+      ④ 祭りや戦いに使う<strong style="color:var(--c3)">青銅器</strong>が作られる<br>
+      ⑤ 記録のために<strong style="color:var(--c3)">文字</strong>が発明される
+    </p>
+  </div>
+
+  <h3 class="sh">キーワード確認（クリックで答えを表示）</h3>
+  <div class="fc-grid">
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">猿人</div><div class="def">約700万年前にアフリカで誕生した最古の人類。二足歩行・簡単な打製石器を使用。</div><div class="hint">クリックで表示</div></div>
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">打製石器</div><div class="def">石を打ち砕いて作った石器。旧石器時代に使用。猿人〜新人が使った。</div><div class="hint">クリックで表示</div></div>
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">磨製石器</div><div class="def">石を磨いて作った石器。新石器時代に使用。農耕・土器とセットで覚える。</div><div class="hint">クリックで表示</div></div>
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">新人（ホモ・サピエンス）</div><div class="def">約20万年前に誕生した現代人の直接の祖先。洞窟壁画を描いた。</div><div class="hint">クリックで表示</div></div>
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">ナウマンゾウ</div><div class="def">氷期に日本列島に渡ってきた大型動物。これを追って新人が日本に来た。</div><div class="hint">クリックで表示</div></div>
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">岩宿遺跡</div><div class="def">群馬県にある遺跡。1946年に日本で初めて打製石器が発見された。旧石器時代の証拠。</div><div class="hint">クリックで表示</div></div>
+  </div>
+</section>
+
+<!-- ═══════ SECTION 4: 古代文明 ═══════ -->
+<section class="sec" id="s4">
+  <div class="sec-head">
+    <div class="day-badge" style="background:rgba(74,158,255,.15);color:var(--c4);border:1px solid rgba(74,158,255,.3)">📅 Day 2〜3 最重要</div>
+    <div class="sec-title" style="color:var(--c4)">世界各地で生まれる文明</div>
+    <div class="sec-q" style="border-color:var(--c4)">学習課題：古代文明はどのような特徴があったのだろうか？</div>
+  </div>
+
+  <h3 class="sh">4大文明比較表<span style="background:rgba(74,158,255,.15);color:var(--c4)">最頻出</span></h3>
+  <div style="overflow-x:auto">
+  <table class="civ-table">
+    <tr>
+      <th>文明名</th><th>川</th><th>誕生時期</th><th>文字</th><th>特徴・発明</th>
+    </tr>
+    <tr>
+      <td><div class="civ-name" style="color:#ffaa44">メソポタミア文明</div></td>
+      <td>ティグリス川<br>ユーフラテス川</td>
+      <td>紀元前<br>3500年ごろ</td>
+      <td><strong>くさび形文字</strong></td>
+      <td>太陰暦・60進法・ジッグラト（神殿）<br><strong>ハンムラビ法典</strong>（目には目を）</td>
+    </tr>
+    <tr>
+      <td><div class="civ-name" style="color:#ffdd44">エジプト文明</div></td>
+      <td>ナイル川</td>
+      <td>紀元前<br>3100年ごろ</td>
+      <td><strong>象形文字</strong><br>（神聖文字）</td>
+      <td><strong>太陽暦</strong>（1年365日）・天文学<br>ピラミッド・スフィンクス・王の絶対的権力</td>
+    </tr>
+    <tr>
+      <td><div class="civ-name" style="color:#44bbff">インダス文明</div></td>
+      <td>インダス川</td>
+      <td>紀元前<br>2300年ごろ</td>
+      <td>インダス文字<br>（未解読）</td>
+      <td>計画都市（<strong>モヘンジョ＝ダロ</strong>）<br>上下水道・公衆浴場・整然とした街路</td>
+    </tr>
+    <tr>
+      <td><div class="civ-name" style="color:#ff7777">中国文明</div></td>
+      <td>黄河・長江</td>
+      <td>紀元前<br>1600年ごろ</td>
+      <td><strong>甲骨文字</strong><br>（漢字の起源）</td>
+      <td>殷（王国）・青銅器・占いによる政治<br><strong>秦</strong>・<strong>漢</strong>が中国を統一</td>
+    </tr>
+  </table>
+  </div>
+
+  <h3 class="sh">メソポタミア文明の詳細</h3>
+  <div class="grid g2">
+    <div class="card s4c">
+      <h4>ハンムラビ法典</h4>
+      <p>紀元前18世紀ごろ、<strong style="color:var(--c4)">ハンムラビ王</strong>がメソポタミア全域を統一して作った法律。<br><br>「<strong style="color:var(--c1)">目には目を、歯には歯を</strong>」＝同じ罪には同じ罰（同害報復の原則）<br><br>大規模な治水工事も行い、人々を支配した。</p>
+    </div>
+    <div class="card s4c">
+      <h4>60進法と太陰暦</h4>
+      <p>時間を計るために<strong style="color:var(--c4)">60進法</strong>が考案された（1時間=60分、1分=60秒の起源）。<br><br><strong style="color:var(--c4)">太陰暦</strong>（月の満ち欠けをもとにした暦）も発明。<br><br>一週間を7日とすることも考案された。</p>
+    </div>
+  </div>
+
+  <h3 class="sh">秦と漢（中国）</h3>
+  <div class="grid g2">
+    <div class="card s4c">
+      <h4>秦（しん）の始皇帝</h4>
+      <p>紀元前3世紀に中国を統一。<br><br>・各地で異なっていた<strong style="color:var(--c4)">貨幣・文字・物差し</strong>などを統一<br>・「王」を超える<strong style="color:var(--c4)">「皇帝」</strong>の称号を使い始める<br>・北方の遊牧民の侵入を防ぐため<strong style="color:var(--c4)">万里の長城</strong>を修築<br>・秦は統一後わずか15年で滅亡</p>
+    </div>
+    <div class="card s4c">
+      <h4>漢（かん）</h4>
+      <p>秦に続く大帝国。<br><br>・<strong style="color:var(--c4)">儒教</strong>を取り入れた政治<br>・東西を結ぶ<strong style="color:var(--c4)">シルクロード</strong>を整備<br>・朝鮮・ベトナム北部まで支配拡大<br>・<strong style="color:var(--c4)">紙</strong>の発明・歴史書の作成<br>・<strong style="color:var(--c4)">朝貢</strong>：周辺諸国が皇帝の家臣となって国交を結ぶ制度</p>
+    </div>
+  </div>
+
+  <h3 class="sh">ギリシャとローマ</h3>
+  <div class="grid g2">
+    <div class="card s4c">
+      <h4>古代ギリシャ</h4>
+      <p><strong style="color:var(--c4)">ポリス</strong>（都市国家）が多数生まれた。<br><br>・アテネで<strong style="color:var(--c4)">民主政</strong>（成年男子市民が参加する民会）<br>・哲学者<strong style="color:var(--c4)">ソクラテス</strong>・アリストテレス<br>・<strong style="color:var(--c4)">パルテノン神殿</strong>（アテナ女神をまつる）<br>・ただし女性・奴隷は参政権なし</p>
+    </div>
+    <div class="card s4c">
+      <h4>古代ローマ</h4>
+      <p>イタリア半島から出発した都市国家。<br><br>・<strong style="color:var(--c4)">共和政</strong>（貴族中心）→ <strong style="color:var(--c4)">帝政</strong>（皇帝が支配）<br>・法律・水道・道路を整備<br>・<strong style="color:var(--c4)">ラテン文字</strong>（アルファベットの起源）を広める<br>・シルクロード・海の道で漢と交流<br>・1〜2世紀に最盛期</p>
+    </div>
+  </div>
+
+  <div class="blue-box hbox">
+    <strong>シルクロード：</strong>漢とローマを結ぶ陸上交通路。中国産の絹織物がローマへ運ばれた。インドから仏教も伝わった。東西文化の交流路として重要。
+  </div>
+
+  <h3 class="sh">キーワード確認（クリックで答えを表示）</h3>
+  <div class="fc-grid">
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">くさび形文字</div><div class="def">メソポタミア文明で使われた文字。粘土板に葦のペンで刻んだ。世界最古の文字の一つ。</div><div class="hint">クリックで表示</div></div>
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">ハンムラビ法典</div><div class="def">紀元前18世紀ごろ、ハンムラビ王が作った法律。「目には目を」の同害報復が有名。</div><div class="hint">クリックで表示</div></div>
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">太陽暦</div><div class="def">エジプト文明が発明した1年365日の暦。ナイル川の氾濫を予測するために発達。</div><div class="hint">クリックで表示</div></div>
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">甲骨文字</div><div class="def">中国・殷の時代の文字。亀の甲や牛の骨に刻んだ。漢字の起源。</div><div class="hint">クリックで表示</div></div>
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">モヘンジョ＝ダロ</div><div class="def">インダス文明の計画都市。上下水道・公衆浴場を備えた高度な都市設計。</div><div class="hint">クリックで表示</div></div>
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">秦の始皇帝</div><div class="def">紀元前3世紀に中国を統一。貨幣・文字・物差しを統一し「皇帝」の称号を使い始めた。万里の長城を修築。</div><div class="hint">クリックで表示</div></div>
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">民主政（アテネ）</div><div class="def">成年男子市民が参加する民会を中心とした政治。現代民主主義の起源。ただし女性・奴隷・外国人は除外。</div><div class="hint">クリックで表示</div></div>
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">シルクロード</div><div class="def">中国（漢）とローマ帝国を結ぶ陸上の交通路。絹・仏教・文化が行き来した。</div><div class="hint">クリックで表示</div></div>
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">朝貢（ちょうこう）</div><div class="def">周辺諸国が中国皇帝に使者を送り、みつぎものを渡して臣下の礼をとること。国交を認めてもらう制度。</div><div class="hint">クリックで表示</div></div>
+  </div>
+</section>
+
+<!-- ═══════ SECTION 5: 三大宗教 ═══════ -->
+<section class="sec" id="s5">
+  <div class="sec-head">
+    <div class="day-badge" style="background:rgba(187,119,255,.15);color:var(--c5);border:1px solid rgba(187,119,255,.3)">📅 Day 3 優先</div>
+    <div class="sec-title" style="color:var(--c5)">仏教・キリスト教・イスラム教の誕生</div>
+    <div class="sec-q" style="border-color:var(--c5)">学習課題：仏教・キリスト教・イスラム教の教えには、それぞれどのような特色があるのだろうか？</div>
+  </div>
+
+  <h3 class="sh">三大宗教の比較</h3>
+
+  <div class="rel-card" style="border-color:rgba(255,170,50,.3)">
+    <div class="rel-head"><div class="rel-name" style="color:#ffaa33">仏教</div><div class="rel-founder">開祖：シャカ（釈迦）</div></div>
+    <div class="rel-rows">
+      <div class="rel-row"><span class="rel-label">開祖</span><span class="rel-val"><strong>シャカ（シッダールタ）</strong><br>前563〜前483ごろ</span></div>
+      <div class="rel-row"><span class="rel-label">生まれた場所</span><span class="rel-val">インド（ルンビニー）<br>→ 現在のネパール</span></div>
+      <div class="rel-row"><span class="rel-label">時代</span><span class="rel-val">紀元前6世紀ごろ</span></div>
+      <div class="rel-row"><span class="rel-label">主な教え</span><span class="rel-val">人は皆平等。苦悩を乗り越え悟りを開けば（ブッダとなれば）誰でも救われる。</span></div>
+      <div class="rel-row"><span class="rel-label">広がり</span><span class="rel-val">インドで国家の保護→シルクロードで中国→朝鮮→日本へ</span></div>
+      <div class="rel-row"><span class="rel-label">聖典等</span><span class="rel-val">経典（きょうてん）多数。仏像・寺院を建てる文化。</span></div>
+    </div>
+  </div>
+
+  <div class="rel-card" style="border-color:rgba(100,180,255,.3)">
+    <div class="rel-head"><div class="rel-name" style="color:#66aaff">キリスト教</div><div class="rel-founder">開祖：イエス</div></div>
+    <div class="rel-rows">
+      <div class="rel-row"><span class="rel-label">開祖</span><span class="rel-val"><strong>イエス（キリスト）</strong><br>前4ごろ〜後30ごろ</span></div>
+      <div class="rel-row"><span class="rel-label">生まれた場所</span><span class="rel-val">パレスチナ（現イスラエル）</span></div>
+      <div class="rel-row"><span class="rel-label">時代</span><span class="rel-val">紀元前後</span></div>
+      <div class="rel-row"><span class="rel-label">主な教え</span><span class="rel-val">神の前では皆平等。神を信じる者は誰でも救われる。形式より内面の信仰を重視。</span></div>
+      <div class="rel-row"><span class="rel-label">広がり</span><span class="rel-val">弟子たちが教会組織・新約聖書を整え布教。4世紀末にローマ帝国の国教となる→ヨーロッパへ</span></div>
+      <div class="rel-row"><span class="rel-label">聖典</span><span class="rel-val"><strong>聖書</strong>（旧約・新約）</span></div>
+    </div>
+  </div>
+
+  <div class="rel-card" style="border-color:rgba(80,200,100,.3)">
+    <div class="rel-head"><div class="rel-name" style="color:#44cc77">イスラム教</div><div class="rel-founder">開祖：ムハンマド</div></div>
+    <div class="rel-rows">
+      <div class="rel-row"><span class="rel-label">開祖</span><span class="rel-val"><strong>ムハンマド</strong><br>570〜632年</span></div>
+      <div class="rel-row"><span class="rel-label">生まれた場所</span><span class="rel-val">アラビア半島<br>メッカ（現サウジアラビア）</span></div>
+      <div class="rel-row"><span class="rel-label">時代</span><span class="rel-val">6世紀</span></div>
+      <div class="rel-row"><span class="rel-label">主な教え</span><span class="rel-val">唯一神アッラーを信仰。神の前では人々は平等。偶像崇拝を禁止。</span></div>
+      <div class="rel-row"><span class="rel-label">広がり</span><span class="rel-val">アラビア半島を中心に急速に拡大。8世紀後半には中央アジア〜北アフリカまで。</span></div>
+      <div class="rel-row"><span class="rel-label">聖典</span><span class="rel-val"><strong>コーラン</strong>（クルアーン）</span></div>
+    </div>
+  </div>
+
+  <div class="purple-box hbox" style="margin-top:16px">
+    <strong>三大宗教の共通点：</strong>いずれも「<strong>神（または真理）の前では人々は平等</strong>」という考えを持つ。差別や貧富の差が広がる社会の中で、心の支えを求めた人々に広まった。また、国家の支配者も自分の権力を安定させるために宗教を保護した。
+  </div>
+
+  <h3 class="sh">キーワード確認（クリックで答えを表示）</h3>
+  <div class="fc-grid">
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">シャカ（釈迦）</div><div class="def">仏教の開祖。インド（現ネパール）生まれ。前563〜前483ごろ。29歳で出家し、35歳で悟りを開いてブッダとなった。</div><div class="hint">クリックで表示</div></div>
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">イエス</div><div class="def">キリスト教の開祖。パレスチナ生まれ。前4〜後30ごろ。「神の前では皆平等」と説いた。十字架で処刑された後に信仰が広まった。</div><div class="hint">クリックで表示</div></div>
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">ムハンマド</div><div class="def">イスラム教の開祖。メッカ生まれ。570〜632年。唯一神アッラーの教えを伝えた。メディナへ移住し信者を増やした。</div><div class="hint">クリックで表示</div></div>
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">コーラン</div><div class="def">イスラム教の聖典。ムハンマドが神から受けたとされる啓示をまとめたもの。</div><div class="hint">クリックで表示</div></div>
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">アッラー</div><div class="def">イスラム教における唯一の神。ムハンマドはアッラーの預言者とされる。</div><div class="hint">クリックで表示</div></div>
+    <div class="fc" onclick="this.classList.toggle('open')"><div class="term">仏教の広がり</div><div class="def">インドで誕生→シルクロードを通じて中国→朝鮮→日本へ伝わった。日本には飛鳥時代に伝来。</div><div class="hint">クリックで表示</div></div>
+  </div>
+</section>
+
+<!-- ═══════ SECTION 6: 総合テスト ═══════ -->
+<section class="sec" id="s6">
+  <div class="sec-head">
+    <div class="day-badge" style="background:rgba(68,204,136,.15);color:var(--ctest);border:1px solid rgba(68,204,136,.3)">📅 Day 4 決戦</div>
+    <div class="sec-title" style="color:var(--ctest)">総合テスト（全30問）</div>
+    <div class="sec-q" style="border-color:var(--ctest)">5つのセクション全範囲からの問題。本番前の最終確認！</div>
+  </div>
+  <div id="quiz-area">
+    <div id="quiz-start" style="text-align:center;padding:30px 0">
+      <p style="font-size:14px;color:var(--muted);margin-bottom:20px">セクション①〜⑤の全範囲から30問出題。<br>各問題には解説がついているので、間違えた問題もしっかり確認しよう。</p>
+      <button class="startbtn" onclick="startQuiz()">テスト開始 →</button>
+    </div>
+    <div id="quiz-body" style="display:none">
+      <div class="qprog" id="qprog"></div>
+      <div id="qarea"></div>
+      <div class="qnav"><button class="qbtn" id="qnextbtn" onclick="nextQ()">次の問題 →</button></div>
+    </div>
+    <div class="result" id="qresult">
+      <div class="rscore" id="rscore">0</div>
+      <div class="rlabel">/ 30問 正解</div>
+      <div class="rmsg" id="rmsg"></div>
+      <div class="rbreak" id="rbreak"></div>
+      <div style="margin-top:16px">
+        <button class="rbtn" onclick="resetQuiz()">もう一度挑戦</button>
+        <button class="rbtn p" onclick="go('s1')">復習する</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+// ═══ NAVIGATION ═══
+function go(id){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  document.querySelector(`.nb[data-s="${id}"]`).classList.add('on');
+  const idx={'s1':1,'s2':2,'s3':3,'s4':4,'s5':5,'s6':6}[id];
+  document.getElementById('pbar').style.width=(idx/6*100)+'%';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// scroll top button
+window.addEventListener('scroll',()=>{
+  document.getElementById('scrollBtn').style.display=window.scrollY>300?'flex':'none';
+});
+
+// ═══ QUIZ DATA ═══
+const qs=[
+  // ①年代・時代区分 (9問)
+  {sec:'①年代',q:'「紀元前」を英語のアルファベットで表すとどれか？',opts:['B.C.','A.D.','B.E.','C.E.'],a:0,ex:'B.C.は「Before Christ（キリストの前）」の略。紀元後はA.D.（Anno Domini）。'},
+  {sec:'①年代',q:'西暦894年は何世紀か？',opts:['8世紀','9世紀','10世紀','11世紀'],a:1,ex:'計算法：先頭2桁(8)+1=9世紀。894年は平安時代で、遣唐使が廃止された年。'},
+  {sec:'①年代',q:'西暦1700年は何世紀か？',opts:['16世紀','17世紀','18世紀','19世紀'],a:2,ex:'先頭2桁(17)+1=18世紀。1700年代＝18世紀で、江戸時代にあたる。'},
+  {sec:'①年代',q:'21世紀はいつから始まるか？',opts:['2000年1月1日','2001年1月1日','1999年1月1日','2010年1月1日'],a:1,ex:'21世紀は2001年1月1日〜2100年12月31日。「20世紀＝1901〜2000年」が終わった次の年から。'},
+  {sec:'①年代',q:'令和7年は西暦何年か？',opts:['2024年','2025年','2026年','2027年'],a:1,ex:'令和元年は2019年。計算：2019−1+7＝2025年。'},
+  {sec:'①年代',q:'昭和はいつから始まったか？',opts:['1912年','1924年','1926年','1930年'],a:2,ex:'昭和は1926年12月25日から。大正の後に続く元号。1989年に平成へ改元。'},
+  {sec:'①時代',q:'古代から現代への時代区分として正しい順番はどれか？',opts:['古代→中世→近世→近代→現代','古代→近世→中世→近代→現代','中世→古代→近世→現代→近代','現代→近代→近世→中世→古代'],a:0,ex:'古代→中世→近世→近代→現代の順。「コ・チュ・キン・キン・ゲン」と覚えよう。'},
+  {sec:'①時代',q:'「縄文時代」という名前の由来はどれか？',opts:['縄文天皇の時代だから','縄目の文様をもつ土器から','縄で作った家が多かったから','縄文という地名から'],a:1,ex:'縄文時代は「縄目（なわめ）の文様をもつ縄文土器」の特色から名づけられた。'},
+  {sec:'①時代',q:'「奈良時代」という名前の由来はどれか？',opts:['元号が「奈良」だったから','奈良という豪族が支配したから','都（政治の中心地）が奈良に置かれたから','奈良という川のそばにあったから'],a:2,ex:'奈良時代は政治の中心地（都）が奈良に置かれていたことから。政治の中心地による命名の例。'},
+
+  // ②調べ方 (4問)
+  {sec:'②調べ方',q:'歴史の資料収集の方法として教科書に挙げられていないものはどれか？',opts:['図書館','博物館・資料館','インターネット','テレビショッピング'],a:3,ex:'教科書では①図書館②博物館・資料館③インターネットの3つが挙げられている。'},
+  {sec:'②調べ方',q:'レポートの4要素の正しい順番はどれか？',opts:['①疑問や謎②自分の推理③分かったこと④結論','①結論②疑問③推理④まとめ','①分かったこと②推理③疑問④結論','①まとめ②疑問③推理④発表'],a:0,ex:'①疑問や謎→②自分の推理（仮説）→③分かったこと→④結論の順。'},
+  {sec:'②調べ方',q:'5W1Hの「1H」は何か？',opts:['いつ（When）','どこで（Where）','なぜ（Why）','どのように（How）'],a:3,ex:'5W＝いつ(When)・どこで(Where)・だれが(Who)・何を(What)・なぜ(Why)。1H＝どのように(How)。'},
+  {sec:'②調べ方',q:'「いつのこと」を示すのに最も効果的な発表資料はどれか？',opts:['地図','年表','写真・イラスト','関係図・流れ図'],a:1,ex:'年表は出来事を時間順に並べた資料で、「いつ(When)」を示すのに最も効果的。'},
+
+  // ③人類の進化 (5問)
+  {sec:'③人類',q:'人類が誕生したとされる大陸はどこか？',opts:['アジア','ヨーロッパ','アフリカ','南アメリカ'],a:2,ex:'最古の人類（猿人）は約700万年前にアフリカで誕生したと考えられている。'},
+  {sec:'③人類',q:'猿人が登場したのは約何年前か？',opts:['約100万年前','約240万年前','約700万年前','約2000万年前'],a:2,ex:'猿人は約700万年前にアフリカで誕生。直立二足歩行と簡単な打製石器の使用が特徴。'},
+  {sec:'③人類',q:'「旧石器時代」に使われた石器はどれか？',opts:['磨製石器','打製石器','鉄器','青銅器'],a:1,ex:'旧石器時代は打製石器（石を打ち砕いて作った石器）を使用した時代。磨製石器は新石器時代から。'},
+  {sec:'③人類',q:'「新石器時代」に新しく始まったこととして正しいのはどれか？',opts:['洞窟に住み始めた','火を使い始めた','農耕と牧畜が始まった','アフリカから移動した'],a:2,ex:'新石器時代（約1万年前〜）に農耕・牧畜・磨製石器・土器が始まった。氷河期終了後の温暖化が背景。'},
+  {sec:'③人類',q:'氷期に日本列島に渡ってきたきっかけとして正しいのはどれか？',opts:['船を発明して海を渡った','大陸と陸続きになり、大型動物を追って新人がやってきた','橋が架けられた','ロープで渡った'],a:1,ex:'氷期は海面が低く日本列島は大陸と陸続きだった。ナウマンゾウなど大型動物を追って新人がやってきた。'},
+
+  // ④古代文明 (8問)
+  {sec:'④文明',q:'メソポタミア文明が生まれた2つの川は？',opts:['ナイル川・インダス川','ティグリス川・ユーフラテス川','黄河・長江','アマゾン川・ナイル川'],a:1,ex:'メソポタミア文明はティグリス川とユーフラテス川の流域（現イラク周辺）に紀元前3500年ごろ誕生。'},
+  {sec:'④文明',q:'メソポタミア文明で使われた文字はどれか？',opts:['象形文字','甲骨文字','くさび形文字','インダス文字'],a:2,ex:'くさび形文字はメソポタミア文明の文字。粘土板に葦のペンで刻んだ。世界最古の文字の一つ。'},
+  {sec:'④文明',q:'ハンムラビ法典の「目には目を」は何の原則か？',opts:['赦す（許す）原則','同じ罪には同じ罰（同害報復の原則）','目上の人を優先する原則','金持ちを守る原則'],a:1,ex:'「目には目を、歯には歯を」は同じ罪には同じ罰を与えるという同害報復の原則。'},
+  {sec:'④文明',q:'エジプト文明が発明した暦はどれか？',opts:['太陰暦（月の満ち欠けをもとにした暦）','太陽暦（1年365日）','60進法','ユリウス暦'],a:1,ex:'エジプト文明はナイル川の氾濫を予測するために天文学を発達させ、1年365日の太陽暦を作った。'},
+  {sec:'④文明',q:'インダス文明の計画都市として有名なのはどれか？',opts:['バビロン','ローマ','モヘンジョ＝ダロ','長安'],a:2,ex:'モヘンジョ＝ダロはインダス文明の代表的な計画都市。上下水道・公衆浴場が整備されていた。'},
+  {sec:'④文明',q:'中国文明で使われた文字で、漢字の起源となったのはどれか？',opts:['くさび形文字','インダス文字','象形文字','甲骨文字'],a:3,ex:'甲骨文字は中国・殷の時代の文字。亀の甲（こう）や牛の骨に刻まれた。漢字の起源。'},
+  {sec:'④文明',q:'秦の始皇帝の業績として正しくないのはどれか？',opts:['中国を統一した','万里の長城を修築した','火薬を発明した','貨幣・文字を統一した'],a:2,ex:'火薬の発明は後の時代（唐〜宋の時代）。始皇帝の業績は①中国統一②万里の長城③貨幣・文字統一④「皇帝」称号の使用。'},
+  {sec:'④文明',q:'古代ギリシャのアテネで行われた政治制度はどれか？',opts:['帝政','共和政','民主政','君主制'],a:2,ex:'アテネでは成年男子市民が参加する民会を中心とした民主政が行われた。現代民主主義の起源とされる。'},
+
+  // ⑤三大宗教 (4問)
+  {sec:'⑤宗教',q:'仏教を開いたのはだれか？また、どこで誕生したか？',opts:['イエス（パレスチナ）','ムハンマド（メッカ）','シャカ（インド）','孔子（中国）'],a:2,ex:'仏教はインド（現ネパール）生まれのシャカが開いた。前563〜前483ごろ、紀元前6世紀。'},
+  {sec:'⑤宗教',q:'キリスト教を開いたのはだれか？',opts:['シャカ','ムハンマド','イエス','ソクラテス'],a:2,ex:'キリスト教の開祖はイエス。パレスチナ生まれ。紀元前後。「神の前では皆平等」と説いた。4世紀末にローマ帝国の国教となった。'},
+  {sec:'⑤宗教',q:'イスラム教の聖典はどれか？',opts:['聖書','コーラン（クルアーン）','論語','ヴェーダ'],a:1,ex:'イスラム教の聖典はコーラン（クルアーン）。ムハンマドが神（アッラー）から受けた啓示をまとめたもの。'},
+  {sec:'⑤宗教',q:'三大宗教に共通する主な教えはどれか？',opts:['天皇を敬うこと','強い者が支配する権利がある','神（または真理）の前では人々は平等','自分の家族だけを大切にすること'],a:2,ex:'仏教・キリスト教・イスラム教はいずれも「神（または真理）の前では人々は平等」という考えを持つ。差別や貧困に苦しむ人々に広まった。'},
+];
+
+let cq=0,score=0,sectScore={},answered=false;
+
+function startQuiz(){
+  document.getElementById('quiz-start').style.display='none';
+  document.getElementById('quiz-body').style.display='block';
+  cq=0;score=0;sectScore={};answered=false;
+  buildProg();
+  showQ();
+}
+
+function buildProg(){
+  const p=document.getElementById('qprog');
+  p.innerHTML='';
+  qs.forEach((_,i)=>{
+    const d=document.createElement('div');
+    d.className='qpdot'+(i===0?' cur':'');
+    d.id='qp'+i;
+    p.appendChild(d);
+  });
+}
+
+function showQ(){
+  const q=qs[cq];
+  const L=['A','B','C','D'];
+  document.getElementById('qarea').innerHTML=`
+    <div class="qcard">
+      <div class="qnum">QUESTION ${cq+1} / ${qs.length}</div>
+      <div class="qtag" style="background:rgba(68,204,136,.15);color:var(--ctest)">${q.sec}</div>
+      <div class="qtext">${q.q}</div>
+      <div class="opts">
+        ${q.opts.map((o,i)=>`<button class="opt" onclick="pick(${i})" id="opt${i}"><span class="opt-l">${L[i]}</span>${o}</button>`).join('')}
+      </div>
+      <div class="fb" id="fb"></div>
+    </div>`;
+  answered=false;
+  document.getElementById('qnextbtn').classList.remove('show');
+  document.getElementById('qnextbtn').textContent=cq===qs.length-1?'結果を見る →':'次の問題 →';
+}
+
+function pick(i){
+  if(answered)return;
+  answered=true;
+  const q=qs[cq];
+  document.querySelectorAll('.opt').forEach(o=>o.classList.add('locked'));
+  document.getElementById('opt'+i).classList.add(i===q.a?'correct':'wrong');
+  if(i!==q.a)document.getElementById('opt'+q.a).classList.add('correct');
+  const fb=document.getElementById('fb');
+  fb.classList.add('show');
+  if(i===q.a){
+    score++;
+    fb.classList.add('ok');
+    fb.innerHTML='✅ 正解！ '+q.ex;
+    const d=document.getElementById('qp'+cq);
+    d.classList.remove('cur');d.classList.add('ok');
+    sectScore[q.sec]=(sectScore[q.sec]||{ok:0,tot:0});
+    sectScore[q.sec].ok++;
+  } else {
+    fb.classList.add('ng');
+    fb.innerHTML='❌ 不正解。'+q.ex;
+    const d=document.getElementById('qp'+cq);
+    d.classList.remove('cur');d.classList.add('ng');
+    sectScore[q.sec]=(sectScore[q.sec]||{ok:0,tot:0});
+  }
+  sectScore[q.sec].tot=(sectScore[q.sec].tot||0)+1;
+  document.getElementById('qnextbtn').classList.add('show');
+}
+
+function nextQ(){
+  cq++;
+  if(cq>=qs.length){showResult();return;}
+  document.getElementById('qp'+cq).classList.add('cur');
+  showQ();
+}
+
+function showResult(){
+  document.getElementById('quiz-body').style.display='none';
+  const r=document.getElementById('qresult');
+  r.classList.add('show');
+  document.getElementById('rscore').textContent=score;
+  const pct=score/qs.length;
+  const msg=document.getElementById('rmsg');
+  if(pct>=0.9){msg.textContent='🏆 すばらしい！本番も大丈夫！';msg.style.color='var(--green)';}
+  else if(pct>=0.7){msg.textContent='👍 よくできた！苦手な部分を復習しよう。';msg.style.color='var(--c1)';}
+  else if(pct>=0.5){msg.textContent='📚 もう一度セクションを復習してから再挑戦！';msg.style.color='var(--c3)';}
+  else{msg.textContent='🔄 各セクションをしっかり読み直してから再挑戦！';msg.style.color='var(--red)';}
+  let bhtml='';
+  Object.entries(sectScore).forEach(([k,v])=>{
+    const c=v.ok/v.tot>=0.7?'var(--green)':v.ok/v.tot>=0.4?'var(--c1)':'var(--red)';
+    bhtml+=`<div class="rbi"><div class="rbl">${k}</div><div class="rbv" style="color:${c}">${v.ok}/${v.tot}</div></div>`;
+  });
+  document.getElementById('rbreak').innerHTML=bhtml;
+}
+
+function resetQuiz(){
+  document.getElementById('qresult').classList.remove('show');
+  document.getElementById('quiz-start').style.display='block';
+}
+</script>
+</body>
+</html>
