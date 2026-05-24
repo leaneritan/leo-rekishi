@@ -32,7 +32,7 @@ const Home = () => {
           <Trophy size={14} /> テスト4日前対策
         </div>
         <h1 className="text-4xl md:text-6xl font-serif font-black tracking-tight text-white">
-           📜 Leo の <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">歴史</span> Study App
+           📜 Leo の <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">歴史</span> 探偵
         </h1>
         <p className="text-muted text-lg max-w-2xl mx-auto">
           テスト範囲の重要ポイントを効率よくマスターしよう！
