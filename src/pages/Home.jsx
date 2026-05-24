@@ -71,8 +71,21 @@ const Home = () => {
             📝 総合テスト（全範囲）
           </span>
         </button>
-        <a href="/leo-rekishi/rekishi_kanzen.html" target="_blank" rel="noopener noreferrer">
-          <button className="px-8 py-5 bg-background text-yellow-400 font-bold rounded-2xl border border-yellow-400/70 transition-all hover:scale-105 hover:bg-yellow-400/10 active:scale-95 shadow-2xl shadow-yellow-400/10 text-xl">
+        <a 
+          href={`${import.meta.env.BASE_URL}rekishi_kanzen.html`}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{textDecoration: 'none'}}
+        >
+          <button style={{
+            border: '1px solid #f0c040',
+            color: '#f0c040',
+            background: 'transparent',
+            padding: '12px 24px',
+            borderRadius: '8px',
+            cursor: 'pointer',
+            fontSize: '14px'
+          }}>
             📄 クイックレビュー（全範囲）
           </button>
         </a>
