@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import manifest from '../content/manifest.json';
 import UnitCard from '../components/UnitCard';
 import { useProgress } from '../hooks/useProgress';
-import { BookOpen, Trophy, Calendar, ExternalLink } from 'lucide-react';
+import { BookOpen, Trophy, Calendar } from 'lucide-react';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -71,17 +71,11 @@ const Home = () => {
             📝 総合テスト（全範囲）
           </span>
         </button>
-        <div>
-          <a
-            href={`${import.meta.env.BASE_URL}rekishi_kanzen.html`}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-white/10 hover:bg-white/15 text-white font-semibold rounded-lg border border-white/10 transition-colors"
-          >
-            <ExternalLink size={18} />
-            Open Kanzen HTML
-          </a>
-        </div>
+        <a href="/leo-rekishi/rekishi_kanzen.html" target="_blank" rel="noopener noreferrer">
+          <button className="px-8 py-5 bg-background text-yellow-400 font-bold rounded-2xl border border-yellow-400/70 transition-all hover:scale-105 hover:bg-yellow-400/10 active:scale-95 shadow-2xl shadow-yellow-400/10 text-xl">
+            📄 クイックレビュー（全範囲）
+          </button>
+        </a>
         <p className="mt-4 text-muted text-sm">全ユニットのクイズからランダムに出題されます</p>
       </footer>
     </div>
