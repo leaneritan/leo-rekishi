@@ -1,0 +1,49 @@
+{
+  "units": [
+    {
+      "id": "ch1-s1",
+      "title": "年代の表し方と時代区分",
+      "chapter": 1,
+      "section": 1,
+      "dayTag": "Day 1",
+      "color": "#f0c040",
+      "description": "西暦・世紀・元号・時代区分を学ぶ"
+    },
+    {
+      "id": "ch1-s2",
+      "title": "歴史の調べ方・まとめ方",
+      "chapter": 1,
+      "section": 2,
+      "dayTag": "Day 1",
+      "color": "#38d9c0",
+      "description": "歴史の謎の調べ方・レポート・発表のしかた"
+    },
+    {
+      "id": "ch2-s1-jinrui",
+      "title": "人類の進化",
+      "chapter": 2,
+      "section": 1,
+      "dayTag": "Day 2",
+      "color": "#ff8844",
+      "description": "猿人から新人へ・旧石器時代と新石器時代"
+    },
+    {
+      "id": "ch2-s1-bunmei",
+      "title": "世界の古代文明",
+      "chapter": 2,
+      "section": 1,
+      "dayTag": "Day 2-3",
+      "color": "#4a9eff",
+      "description": "四大文明・ギリシャ・ローマ"
+    },
+    {
+      "id": "ch2-s1-shukyo",
+      "title": "三大宗教の誕生",
+      "chapter": 2,
+      "section": 1,
+      "dayTag": "Day 3",
+      "color": "#bb77ff",
+      "description": "仏教・キリスト教・イスラム教"
+    }
+  ]
+}
