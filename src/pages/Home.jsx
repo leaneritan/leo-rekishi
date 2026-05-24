@@ -73,13 +73,13 @@ const Home = () => {
         </button>
         <div>
           <a
-            href={`${import.meta.env.BASE_URL}index.html`}
+            href={`${import.meta.env.BASE_URL}rekishi_kanzen.html`}
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-white/10 hover:bg-white/15 text-white font-semibold rounded-lg border border-white/10 transition-colors"
           >
             <ExternalLink size={18} />
-            Open HTML
+            Open Kanzen HTML
           </a>
         </div>
         <p className="mt-4 text-muted text-sm">全ユニットのクイズからランダムに出題されます</p>
