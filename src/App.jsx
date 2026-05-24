@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import UnitPage from './pages/UnitPage';
 import NotFound from './pages/NotFound';
 import QuizEngine from './components/QuizEngine';
+import TimelineDrag from './components/TimelineDrag';
 import manifest from './content/manifest.json';
 import { useState, useEffect } from 'react';
 
@@ -31,6 +32,14 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/unit/:id" element={<UnitPage />} />
+          <Route
+            path="/timeline-drag"
+            element={
+              <div className="container mx-auto px-4 py-8 max-w-6xl">
+                <TimelineDrag />
+              </div>
+            }
+          />
           <Route
             path="/quiz/all"
             element={

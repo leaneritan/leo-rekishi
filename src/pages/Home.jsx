@@ -71,6 +71,14 @@ const Home = () => {
             📝 総合テスト（全範囲）
           </span>
         </button>
+        <div>
+          <button
+            onClick={() => navigate('/timeline-drag')}
+            className="px-8 py-5 bg-[#090b18] text-yellow-400 font-bold rounded-2xl border border-yellow-400/70 transition-all hover:scale-105 hover:bg-yellow-400/10 active:scale-95 shadow-2xl shadow-yellow-400/10 text-xl"
+          >
+            🗓️ 年表並べ替えゲーム
+          </button>
+        </div>
         <a 
           href={`${import.meta.env.BASE_URL}rekishi_kanzen.html`}
           target="_blank"

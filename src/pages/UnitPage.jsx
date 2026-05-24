@@ -4,6 +4,7 @@ import { ArrowLeft, BookOpen, Layers, Clock, CheckCircle2 } from 'lucide-react';
 import SlideViewer from '../components/SlideViewer';
 import FlashcardDeck from '../components/FlashcardDeck';
 import Timeline from '../components/Timeline';
+import TimelineDrag from '../components/TimelineDrag';
 import QuizEngine from '../components/QuizEngine';
 import { useProgress } from '../hooks/useProgress';
 
@@ -54,6 +55,7 @@ const UnitPage = () => {
     { id: 'slides', label: 'スライド', icon: BookOpen },
     { id: 'flashcards', label: 'フラッシュカード', icon: Layers },
     { id: 'timeline', label: '年表', icon: Clock },
+    { id: 'timelineDrag', label: '🗓️ 並べ替え', icon: Clock },
     { id: 'quiz', label: 'クイズ', icon: CheckCircle2 },
   ];
 
@@ -115,6 +117,7 @@ const UnitPage = () => {
           {activeTab === 'slides' && <SlideViewer slides={unit.slides} unitColor={unit.color} />}
           {activeTab === 'flashcards' && <FlashcardDeck flashcards={unit.flashcards} unitColor={unit.color} unitId={unit.id} />}
           {activeTab === 'timeline' && <Timeline events={unit.timeline} unitColor={unit.color} />}
+          {activeTab === 'timelineDrag' && <TimelineDrag events={unit.timeline} />}
           {activeTab === 'quiz' && <QuizEngine questions={unit.quiz} unitColor={unit.color} unitId={unit.id} />}
         </div>
       </main>
